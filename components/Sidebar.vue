@@ -49,12 +49,10 @@
 
 <script setup>
 const skills = [
-  { name: 'HTML/CSS', level: 90, color: '#e34c26' },
-  { name: 'JavaScript', level: 85, color: '#f0db4f' },
-  { name: 'Vue.js', level: 80, color: '#42b883' },
-  { name: 'Node.js', level: 75, color: '#68a063' },
-  { name: 'SQL', level: 80, color: '#336791' },
-  { name: 'Python', level: 70, color: '#3572A5' },
+  { name: 'Java', level: 70, color: '#e34c26' },
+  { name: 'Python', level: 85, color: '#f0db4f' },
+  { name: 'Ada', level: 60, color: '#42b883' },
+  { name: 'SQL', level: 65, color: '#68a063' },
 ];
 </script>
 

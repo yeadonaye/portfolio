@@ -4,13 +4,13 @@
       <nav class="github-nav">
         <div class="github-nav-left">
           <span class="github-logo">
-            <i class="fas fa-code"></i>
+            <font-awesome-icon icon="code" />
             <span>Portfolio</span>
           </span>
         </div>
         <div class="github-nav-right">
-          <button class="theme-toggle" @click="toggleTheme">
-            <i :class="isDark ? 'fas fa-sun' : 'fas fa-moon'"></i>
+          <button class="theme-toggle" @click="toggleTheme" :title="isDark ? 'Passer en mode clair' : 'Passer en mode sombre'">
+            <font-awesome-icon :icon="isDark ? 'sun' : 'moon'" />
           </button>
         </div>
       </nav>

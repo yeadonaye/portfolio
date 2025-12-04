@@ -31,18 +31,20 @@
             <div class="timeline-dot"></div>
             <div class="timeline-content">
               <h3>BUT Informatique</h3>
-              <p class="timeline-date">2022 - Présent</p>
+              <p class="timeline-date">2024 - Présent</p>
               <p>Université de Toulouse - IUT Paul Sabatier</p>
-              <p>Spécialité : Administration, Gestion et Exploitation des Données</p>
+              <p>Parcours : Administration, Gestion et Exploitation des Données</p>
             </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
-              <h3>Baccalauréat Scientifique</h3>
-              <p class="timeline-date">2022</p>
-              <p>Lycée Général et Technologique</p>
-              <p>Mention Très Bien</p>
+              <h3>Baccalauréat Générale</h3>
+              <p class="timeline-date">2024</p>
+              <p>Lycée Guebre Mariam</p>
+              <p>Spécialités : Mathématiques, NSI, Physique et Chimie</p>
+              <p>Option : Maths Expertes</p>
+              <p>Mention Assez Bien</p>
             </div>
           </div>
         </div>

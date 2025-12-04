@@ -33,6 +33,10 @@
         <div class="tab-content" :class="{ 'active': activeTab === 'cv' }">
           <CV v-if="activeTab === 'cv'" />
         </div>
+        
+        <div class="tab-content" :class="{ 'active': activeTab === 'contact' }">
+          <Contact v-if="activeTab === 'contact'" />
+        </div>
       </div>
     </main>
     
@@ -42,14 +46,41 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import Contact from '~/components/Contact.vue';
 
 const activeTab = ref('overview');
+
+// Gestionnaire d'événement pour le changement d'onglet
+const handleTabChange = (event) => {
+  const validTabs = ['overview', 'projects', 'cv', 'contact'];
+  if (validTabs.includes(event.detail)) {
+    activeTab.value = event.detail;
+  }
+};
+
+// Ajouter et supprimer l'écouteur d'événement
+onMounted(() => {
+  window.addEventListener('tab-change', handleTabChange);
+  
+  // Gestion des ancres dans l'URL au chargement de la page
+  if (window.location.hash) {
+    const hash = window.location.hash.substring(1);
+    if (['projects', 'cv', 'contact'].includes(hash)) {
+      activeTab.value = hash;
+    }
+  }
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('tab-change', handleTabChange);
+});
 
 const tabs = [
   { id: 'overview', name: 'Vue d\'ensemble', icon: 'fas fa-home' },
   { id: 'projects', name: 'Projets', icon: 'fas fa-project-diagram' },
   { id: 'cv', name: 'CV', icon: 'fas fa-file-alt' },
+  { id: 'contact', name: 'Contact', icon: 'fas fa-envelope' },
 ];
 </script>
 

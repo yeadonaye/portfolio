@@ -6,7 +6,7 @@
       <!-- Projet 1 -->
       <div class="project-card">
         <div class="project-header">
-          <h3>Application de Gestion de Projets</h3>
+          <h3>Application de vente de Tomate</h3>
           <div class="project-links">
             <a href="#" class="project-link" title="Voir le code">
               <i class="fab fa-github"></i>
@@ -17,12 +17,15 @@
           </div>
         </div>
         <p class="project-description">
-          Une application web complète de gestion de projets avec authentification, tableaux Kanban et suivi des tâches.
+          Dans le cadre d’une SAE, j’ai collaboré avec un camarade de classe pour concevoir et développer une application Java destinée à gérer la vente de tomates. Grâce à l’outil WindowBuilder et à l’interface Java Swing, nous avons réalisé une application dotée d’une interface graphique intuitive, permettant de parcourir et sélectionner une large collection de variétés de tomates.
+        </p>
+        <p class="project-description">
+          Ce projet nous a permis de renforcer nos compétences en développement Java, en conception d’interfaces graphiques et en structuration d’une application orientée utilisateur.         
         </p>
         <div class="project-tech">
-          <span class="tech-tag">Vue.js</span>
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">MongoDB</span>
+          <span class="tech-tag">Java</span>
+          <span class="tech-tag">Java Swing</span>
+          <span class="tech-tag"></span>
         </div>
       </div>
 
@@ -33,6 +36,9 @@
           <div class="project-links">
             <a href="#" class="project-link" title="Voir le code">
               <i class="fab fa-github"></i>
+            </a>
+            <a href="#" class="project-link" title="Voir la démo">
+              <i class="fas fa-external-link-alt"></i>
             </a>
           </div>
         </div>
@@ -53,6 +59,9 @@
           <div class="project-links">
             <a href="#" class="project-link" title="Voir le code">
               <i class="fab fa-github"></i>
+            </a>
+            <a href="#" class="project-link" title="Voir la démo">
+              <i class="fas fa-external-link-alt"></i>
             </a>
           </div>
         </div>

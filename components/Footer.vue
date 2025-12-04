@@ -3,10 +3,9 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-links">
-          <a href="#" class="footer-link">À propos</a>
-          <a href="#" class="footer-link">Projets</a>
-          <a href="#" class="footer-link">CV</a>
-          <a href="#" class="footer-link">Contact</a>
+          <a href="#projects" @click.prevent="scrollTo('projects')" class="footer-link">Projets</a>
+          <a href="#cv" @click.prevent="scrollTo('cv')" class="footer-link">CV</a>
+          <a href="#contact" @click.prevent="scrollTo('contact')" class="footer-link">Contact</a>
         </div>
         <div class="footer-social">
           <a href="https://github.com/yeadonaye" class="social-link" aria-label="GitHub" title="GitHub">
@@ -20,8 +19,7 @@
           </a>
         </div>
         <div class="footer-copyright">
-          <p>© {{ currentYear }} SENTAYEHU Yeadonaye. Tous droits réservés.</p>
-          <p class="footer-note">Construit avec <i class="fas fa-heart" style="color: #e25555;"></i> et Nuxt.js</p>
+          <p>© {{ currentYear }} SENTAYEHU</p>
         </div>
       </div>
     </div>
@@ -32,6 +30,17 @@
 import { computed } from 'vue';
 
 const currentYear = computed(() => new Date().getFullYear());
+
+const scrollTo = (section) => {
+  // Mettre à jour l'onglet actif
+  window.dispatchEvent(new CustomEvent('tab-change', { detail: section }));
+  
+  // Faire défiler vers la section
+  const element = document.getElementById(section);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+};
 </script>
 
 <style scoped>
@@ -61,11 +70,16 @@ const currentYear = computed(() => new Date().getFullYear());
   color: var(--github-text-secondary);
   text-decoration: none;
   font-size: 14px;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .footer-link:hover {
   color: var(--github-primary);
+  background-color: rgba(46, 164, 79, 0.1);
+  text-decoration: none;
 }
 
 .footer-social {

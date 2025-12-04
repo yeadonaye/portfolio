@@ -13,24 +13,23 @@
         <div class="cv-item">
           <div class="cv-item-header">
             <h4>BUT Informatique</h4>
-            <span class="cv-date">2022 - Présent</span>
+            <span class="cv-date">2024 - Présent</span>
           </div>
           <p class="cv-location">Université de Toulouse - IUT Paul Sabatier</p>
           <p class="cv-description">
-            Spécialité : Administration, Gestion et Exploitation des Données<br>
-            Cours : Développement Web, Bases de Données, Algorithmique, Programmation Orientée Objet
+            Parcours : Administration, Gestion et Exploitation des Données
           </p>
         </div>
         
         <div class="cv-item">
           <div class="cv-item-header">
-            <h4>Baccalauréat Scientifique</h4>
-            <span class="cv-date">2022</span>
+            <h4>Baccalauréat Générale</h4>
+            <span class="cv-date">2024</span>
           </div>
-          <p class="cv-location">Lycée Général et Technologique</p>
+          <p class="cv-location">Lycée Guebre Mariam</p>
           <p class="cv-description">
-            Mention Très Bien<br>
-            Spécialités : Mathématiques, Physique-Chimie, Sciences de l'Ingénieur
+            Mention Assez Bien<br>
+            Spécialités : Mathématiques, NSI, Physique Chimie
           </p>
         </div>
       </div>
@@ -39,10 +38,10 @@
         <h3><i class="fas fa-briefcase"></i> Expérience Professionnelle</h3>
         <div class="cv-item">
           <div class="cv-item-header">
-            <h4>Stage Développeur Web</h4>
-            <span class="cv-date">Été 2023</span>
+            <h4>Stage Développeur</h4>
+            <span class="cv-date">Avril - Juin 2026</span>
           </div>
-          <p class="cv-location">Entreprise X, Toulouse</p>
+          <p class="cv-location">IRIT, Toulouse</p>
           <ul class="cv-description">
             <li>Développement d'une application web interne avec Vue.js et Node.js</li>
             <li>Conception et implémentation d'une base de données relationnelle</li>
@@ -52,14 +51,12 @@
         
         <div class="cv-item">
           <div class="cv-item-header">
-            <h4>Projet Universitaire - Gestion de Bibliothèque</h4>
-            <span class="cv-date">2023</span>
+            <h4>Bénévolat</h4>
+            <span class="cv-date">2023-2024</span>
           </div>
-          <p class="cv-location">Université de Toulouse</p>
+          <p class="cv-location">MARYJOY Ethiopia</p>
           <ul class="cv-description">
-            <li>Conception et développement d'une application de gestion de bibliothèque</li>
-            <li>Travail en équipe avec méthodologie Agile</li>
-            <li>Technologies utilisées : Java, JavaFX, SQL</li>
+            <li>Aide aux personnes défavorisées</li>
           </ul>
         </div>
       </div>
@@ -70,31 +67,39 @@
           <div class="skill-category">
             <h4>Langages</h4>
             <ul>
-              <li>JavaScript/TypeScript</li>
-              <li>Python</li>
               <li>Java</li>
-              <li>SQL</li>
+              <li>Python</li>
+              <li>PL/SQL</li>
+              <li>My SQL</li>
               <li>HTML/CSS</li>
+              <li>PHP</li>
+              <li>Ada</li>
             </ul>
           </div>
           
           <div class="skill-category">
             <h4>Frameworks & Bibliothèques</h4>
             <ul>
-              <li>Vue.js/Nuxt.js</li>
-              <li>React</li>
-              <li>Node.js/Express</li>
-              <li>Pandas/NumPy</li>
+              <li>Nuxt.js/Vue.js</li>
+              <li>Pandas</li>
+              <li>Numpy</li>
+              <li>Matplotlib</li>
+              <li>Flask</li>
+              <li>Tkinter</li>
             </ul>
           </div>
           
           <div class="skill-category">
-            <h4>Outils & Technologies</h4>
+            <h4>Logiciels maîtrisés</h4>
             <ul>
-              <li>Git/GitHub</li>
-              <li>Docker</li>
-              <li>PostgreSQL/MongoDB</li>
-              <li>Figma</li>
+              <li>VirtualBox</li>
+              <li>Oracle SQL Developer</li>
+              <li>Eclipse</li>
+              <li>Modelio</li>
+              <li>Oracle APEX</li>
+              <li>Visual Studio Code</li>
+              <li>Git</li>
+              <li>Windev</li>
             </ul>
           </div>
         </div>
@@ -106,7 +111,7 @@
           <div class="language">
             <span>Français</span>
             <div class="language-level">
-              <span class="dot filled"></span>
+              <span></span>
               <span class="dot filled"></span>
               <span class="dot filled"></span>
               <span class="dot filled"></span>
@@ -116,18 +121,28 @@
           <div class="language">
             <span>Anglais</span>
             <div class="language-level">
-              <span class="dot filled"></span>
+              <span></span>
               <span class="dot filled"></span>
               <span class="dot filled"></span>
               <span class="dot filled"></span>
               <span class="dot"></span>
             </div>
           </div>
+          <div class="language">
+            <span>Amharique</span>
+              <div class="language-level">
+                <span></span>
+                <span class="dot filled"></span>
+                <span class="dot filled"></span>
+                <span class="dot filled"></span>
+                <span class="dot filled"></span>
+              </div>      
+          </div>
         </div>
       </div>
       
       <div class="cv-actions">
-        <a href="#" class="download-btn">
+        <a href="assets\ressources\SENTAYEHU_Yeadonaye_Ashenafi.pdf" class="download-btn">
           <i class="fas fa-download"></i> Télécharger le CV complet (PDF)
         </a>
       </div>
