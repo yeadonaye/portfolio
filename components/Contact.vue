@@ -40,8 +40,13 @@
           ></textarea>
         </div>
         
-        <button type="submit" class="submit-btn" :disabled="isLoading">
-          <i class="fas fa-paper-plane"></i> {{ isLoading ? 'Envoi en cours...' : 'Envoyer' }}
+        <div class="recaptcha-container">
+          <div ref="recaptchaElement" class="g-recaptcha" :data-sitekey="recaptchaSiteKey" data-callback="onRecaptchaSuccess" data-expired-callback="onRecaptchaExpired"></div>
+        </div>
+
+        <button type="submit" class="submit-btn" :disabled="isLoading || !isRecaptchaVerified">
+          <span v-if="!isLoading">Envoyer le message</span>
+          <span v-else>Envoi en cours...</span>
         </button>
         
         <div v-if="isSuccess" class="success-message">
@@ -58,8 +63,48 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import emailjs from '@emailjs/browser';
+
+const recaptchaSiteKey = '6Ld5bCEsAAAAANpNOgMjH2xP17dtvSdazkoLamVU'; // Votre clé reCAPTCHA
+const isRecaptchaVerified = ref(false);
+const recaptchaElement = ref(null);
+
+// Fonctions globales pour reCAPTCHA
+window.onRecaptchaSuccess = (response) => {
+  isRecaptchaVerified.value = true;
+  console.log('reCAPTCHA verified:', response);
+};
+
+window.onRecaptchaExpired = () => {
+  isRecaptchaVerified.value = false;
+  console.log('reCAPTCHA expired');
+};
+
+// Charger reCAPTCHA
+const loadRecaptcha = () => {
+  const script = document.createElement('script');
+  script.src = `https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit`;
+  script.async = true;
+  script.defer = true;
+  
+  window.onRecaptchaLoad = () => {
+    console.log('reCAPTCHA loaded');
+    if (window.grecaptcha) {
+      window.grecaptcha.render(recaptchaElement.value, {
+        sitekey: recaptchaSiteKey,
+        callback: window.onRecaptchaSuccess,
+        'expired-callback': window.onRecaptchaExpired
+      });
+    }
+  };
+  
+  document.head.appendChild(script);
+};
+
+onMounted(() => {
+  loadRecaptcha();
+});
 
 const formData = ref({
   name: '',
@@ -220,6 +265,27 @@ const handleSubmit = async () => {
 textarea.form-control {
   resize: vertical;
   min-height: 120px;
+}
+
+.recaptcha-container {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+  min-height: 78px;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+
+/* Style personnalisé pour le widget reCAPTCHA */
+.grecaptcha-badge {
+  visibility: hidden; /* Cache le badge reCAPTCHA */
+}
+
+/* Style pour le conteneur du widget */
+.g-recaptcha > div > div {
+  margin: 0 auto;
 }
 
 .submit-btn {
