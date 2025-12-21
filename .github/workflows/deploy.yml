@@ -1,0 +1,35 @@
+name: Deploy Nuxt to Alwaysdata
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Nuxt
+        run: npm run generate
+
+      - name: Deploy to Alwaysdata
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.ALWAYSDATA_HOST }}
+          username: ${{ secrets.ALWAYSDATA_USER }}
+          password: ${{ secrets.ALWAYSDATA_PASSWORD }}
+          source: ".output/public/*"
+          target: ${{ secrets.ALWAYSDATA_PATH }}
+          strip_components: 2
