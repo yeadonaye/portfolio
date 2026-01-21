@@ -1,14 +1,13 @@
-name: Deploy Nuxt to Alwaysdata
+name: Deploy Nuxt (Build on GitHub)
 
 on:
   push:
     branches:
-      - main  # Vérifiez si votre branche s'appelle main ou master
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -19,22 +18,20 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
 
-      - name: Build Nuxt project
-        run: npm run build
-
-      - name: Deploy to Alwaysdata via SCP
+      - name: Deploy to Alwaysdata via SSH
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          # On envoie uniquement le dossier .output (le serveur Nuxt) et le package.json
           source: ".output/,package.json"
           target: "www/"
-          rm: true # Supprime l'ancien contenu pour éviter les conflits
+          rm: true # Nettoie le dossier avant l'envoi
 
       - name: Restart Alwaysdata Site
         uses: appleboy/ssh-action@master
@@ -42,13 +39,4 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            # Tente de redémarrer proprement, sinon tue le processus pour forcer un reboot
-            if command -v alv-restart-site >/dev/null 2>&1; then
-              alv-restart-site
-            elif [ -f "/usr/local/bin/alv-restart-site" ]; then
-              /usr/local/bin/alv-restart-site
-            else
-              echo "Redémarrage forcé via pkill..."
-              pkill -u ${{ secrets.SSH_USER }} node || true
-            fi
+          script: /usr/bin/alv-restart-site
