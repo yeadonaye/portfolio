@@ -1,4 +1,4 @@
-name: Deploy Portfolio to Alwaysdata
+name: Deploy Nuxt to Alwaysdata
 
 on:
   push:
@@ -6,46 +6,39 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy via SSH
+      - name: Executing remote ssh commands
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            # 1. Se positionner dans le répertoire personnel
+            # Se placer à la racine
             cd $HOME
             
-            # 2. Nettoyage et préparation du dossier www
+            # Nettoyage de sécurité si le dossier est corrompu
             if [ ! -d "www/.git" ]; then
-              echo "Nettoyage complet du dossier www..."
               rm -rf www
               mkdir -p www
               cd www
               git clone https://github.com/yeadonaye/portfolio.git .
             else
               cd www
-              echo "Mise à jour du dépôt existant..."
               git config --global --add safe.directory $(pwd)
               git fetch origin main
               git reset --hard origin/main
             fi
 
-            # 3. Configuration de l'environnement Node.js
+            # Environnement et Build
             export PATH=$PATH:/usr/local/bin
-            
-            # 4. Installation des dépendances et Build Nuxt
-            echo "Installation des dépendances..."
             npm install
-            echo "Construction du projet (Build)..."
             npm run build
 
-            # 5. Redémarrage du site (Méthode Alwaysdata)
-            echo "Redémarrage du site..."
-            /usr/bin/alv-restart-site || alv-restart-site || echo "Redémarrage manuel requis via le panel"
+            # Redémarrage forcé
+            /usr/bin/alv-restart-site || alv-restart-site
