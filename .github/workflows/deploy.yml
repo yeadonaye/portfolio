@@ -1,35 +1,40 @@
-name: Deploy Nuxt to Alwaysdata
+name: Deploy Portfolio to Alwaysdata
 
 on:
   push:
     branches:
-      - main
+      - main # Changez en 'master' si c'est le nom de votre branche
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          node-version: 18
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            # 1. Aller dans le dossier du site
+            cd www/
+            
+            # 2. Initialiser ou mettre à jour le code
+            if [ ! -d ".git" ]; then
+              git clone https://github.com/${{ github.repository }}.git .
+            else
+              git pull origin main
+            fi
 
-      - name: Install dependencies
-        run: npm install
+            # 3. Charger Node.js (spécifique à Alwaysdata)
+            export PATH=$PATH:/usr/local/bin
+            
+            # 4. Installer les dépendances et builder le projet Nuxt
+            npm install
+            npm run build
 
-      - name: Build Nuxt
-        run: npm run generate
-
-      - name: Deploy to Alwaysdata
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.ALWAYSDATA_HOST }}
-          username: ${{ secrets.ALWAYSDATA_USER }}
-          password: ${{ secrets.ALWAYSDATA_PASSWORD }}
-          source: ".output/public/*"
-          target: ${{ secrets.ALWAYSDATA_PATH }}
-          strip_components: 2
+            # 5. Redémarrer le site pour appliquer les changements
+            alv-restart-site
