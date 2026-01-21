@@ -1,40 +1,29 @@
-name: Deploy Portfolio to Alwaysdata
-
-on:
-  push:
-    branches:
-      - main # Changez en 'master' si c'est le nom de votre branche
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            # 1. Aller dans le dossier du site
-            cd www/
+script: |
+            # 1. Entrer dans le dossier (le créer s'il n'existe pas)
+            mkdir -p www
+            cd www
             
-            # 2. Initialiser ou mettre à jour le code
+            # 2. Configurer Git pour éviter les erreurs de permissions
+            git config --global --add safe.directory $(pwd)
+
+            # 3. Initialiser le dépôt si nécessaire ou mettre à jour
             if [ ! -d ".git" ]; then
-              git clone https://github.com/${{ github.repository }}.git .
+              echo "Nettoyage du dossier et clonage initial..."
+              # On vide le dossier pour éviter l'erreur "not empty"
+              rm -rf *
+              git clone https://github.com/yeadonaye/portfolio.git .
             else
-              git pull origin main
+              echo "Mise à jour du code existant..."
+              git fetch origin main
+              git reset --hard origin/main
             fi
 
-            # 3. Charger Node.js (spécifique à Alwaysdata)
+            # 4. Charger l'environnement Node.js
             export PATH=$PATH:/usr/local/bin
             
-            # 4. Installer les dépendances et builder le projet Nuxt
+            # 5. Installation et Build (Nuxt 3)
             npm install
             npm run build
 
-            # 5. Redémarrer le site pour appliquer les changements
-            alv-restart-site
+            # 6. Redémarrage du site via le chemin absolu
+            /usr/local/bin/alv-restart-site
