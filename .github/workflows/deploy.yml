@@ -19,30 +19,33 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            # 1. Créer/Entrer dans le dossier
-            mkdir -p www
-            cd www
+            # 1. Se positionner dans le répertoire personnel
+            cd $HOME
             
-            # 2. Nettoyage radical pour le premier déploiement
-            if [ ! -d ".git" ]; then
-              echo "Nettoyage total (fichiers cachés inclus)..."
-              find . -maxdepth 1 -not -path '`.' -delete
+            # 2. Nettoyage et préparation du dossier www
+            if [ ! -d "www/.git" ]; then
+              echo "Nettoyage complet du dossier www..."
+              rm -rf www
+              mkdir -p www
+              cd www
               git clone https://github.com/yeadonaye/portfolio.git .
             else
-              echo "Mise à jour..."
+              cd www
+              echo "Mise à jour du dépôt existant..."
               git config --global --add safe.directory $(pwd)
               git fetch origin main
               git reset --hard origin/main
             fi
 
-            # 3. Installation et Build avec chemin Node forcé
+            # 3. Configuration de l'environnement Node.js
             export PATH=$PATH:/usr/local/bin
+            
+            # 4. Installation des dépendances et Build Nuxt
+            echo "Installation des dépendances..."
             npm install
+            echo "Construction du projet (Build)..."
             npm run build
 
-            # 4. Redémarrage (on essaye les deux chemins possibles)
-            if [ -f "/usr/local/bin/alv-restart-site" ]; then
-              /usr/local/bin/alv-restart-site
-            else
-              alv-restart-site
-            fi
+            # 5. Redémarrage du site (Méthode Alwaysdata)
+            echo "Redémarrage du site..."
+            /usr/bin/alv-restart-site || alv-restart-site || echo "Redémarrage manuel requis via le panel"
