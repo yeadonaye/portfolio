@@ -1,4 +1,24 @@
-script: |
+name: Deploy Portfolio to Alwaysdata
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
             # 1. Entrer dans le dossier (le créer s'il n'existe pas)
             mkdir -p www
             cd www
@@ -9,7 +29,6 @@ script: |
             # 3. Initialiser le dépôt si nécessaire ou mettre à jour
             if [ ! -d ".git" ]; then
               echo "Nettoyage du dossier et clonage initial..."
-              # On vide le dossier pour éviter l'erreur "not empty"
               rm -rf *
               git clone https://github.com/yeadonaye/portfolio.git .
             else
