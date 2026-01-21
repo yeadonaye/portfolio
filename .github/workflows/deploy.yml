@@ -19,30 +19,30 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            # 1. Entrer dans le dossier (le créer s'il n'existe pas)
+            # 1. Créer/Entrer dans le dossier
             mkdir -p www
             cd www
             
-            # 2. Configurer Git pour éviter les erreurs de permissions
-            git config --global --add safe.directory $(pwd)
-
-            # 3. Initialiser le dépôt si nécessaire ou mettre à jour
+            # 2. Nettoyage radical pour le premier déploiement
             if [ ! -d ".git" ]; then
-              echo "Nettoyage du dossier et clonage initial..."
-              rm -rf *
+              echo "Nettoyage total (fichiers cachés inclus)..."
+              find . -maxdepth 1 -not -path '`.' -delete
               git clone https://github.com/yeadonaye/portfolio.git .
             else
-              echo "Mise à jour du code existant..."
+              echo "Mise à jour..."
+              git config --global --add safe.directory $(pwd)
               git fetch origin main
               git reset --hard origin/main
             fi
 
-            # 4. Charger l'environnement Node.js
+            # 3. Installation et Build avec chemin Node forcé
             export PATH=$PATH:/usr/local/bin
-            
-            # 5. Installation et Build (Nuxt 3)
             npm install
             npm run build
 
-            # 6. Redémarrage du site via le chemin absolu
-            /usr/local/bin/alv-restart-site
+            # 4. Redémarrage (on essaye les deux chemins possibles)
+            if [ -f "/usr/local/bin/alv-restart-site" ]; then
+              /usr/local/bin/alv-restart-site
+            else
+              alv-restart-site
+            fi
