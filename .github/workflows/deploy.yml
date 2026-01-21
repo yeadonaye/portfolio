@@ -1,4 +1,4 @@
-name: Deploy Nuxt to Alwaysdata
+name: Deploy Nuxt (Build on GitHub)
 
 on:
   push:
@@ -6,46 +6,37 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Executing remote ssh commands
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Deploy to Alwaysdata via SSH
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            # 1. Se positionner dans le répertoire personnel
-            cd $HOME
-            
-            # 2. Nettoyage et préparation du dossier www
-            if [ ! -d "www/.git" ]; then
-              echo "Nettoyage complet du dossier www..."
-              rm -rf www
-              mkdir -p www
-              cd www
-              git clone https://github.com/yeadonaye/portfolio.git .
-            else
-              cd www
-              echo "Mise à jour du dépôt existant..."
-              git config --global --add safe.directory $(pwd)
-              git fetch origin main
-              git reset --hard origin/main
-            fi
+          source: ".output/,package.json"
+          target: "www/"
+          rm: true # Nettoie le dossier avant l'envoi
 
-            # 3. Configuration de l'environnement Node.js
-            export PATH=$PATH:/usr/local/bin
-            
-            # 4. Installation des dépendances et Build Nuxt
-            echo "Installation des dépendances..."
-            npm install
-            echo "Construction du projet (Build)..."
-            npm run build
-
-            # 5. Redémarrage du site (Méthode Alwaysdata)
-            echo "Redémarrage du site..."
-            /usr/bin/alv-restart-site || alv-restart-site || echo "Redémarrage manuel requis via le panel"
+      - name: Restart Alwaysdata Site
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: /usr/bin/alv-restart-site
