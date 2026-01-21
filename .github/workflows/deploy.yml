@@ -3,7 +3,7 @@ name: Deploy Nuxt to Alwaysdata
 on:
   push:
     branches:
-      - main
+      - main  # Vérifiez si votre branche s'appelle main ou master
 
 jobs:
   build-and-deploy:
