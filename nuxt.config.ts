@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-12-21',
 
+  // Indispensable pour que Nuxt fonctionne en mode serveur sur Alwaysdata
+  ssr: true,
+
   devtools: { enabled: true },
 
   css: [
@@ -10,6 +13,9 @@ export default defineNuxtConfig({
   ],
 
   app: {
+    // On force le chemin des assets pour éviter les erreurs 500
+    baseURL: '/',
+    buildAssetsDir: '/_nuxt/',
     head: {
       title: 'My Portfolio',
       meta: [
@@ -24,6 +30,12 @@ export default defineNuxtConfig({
         }
       ]
     }
+  },
+
+  // Configuration Nitro pour optimiser le service des fichiers statiques
+  nitro: {
+    serveStatic: true,
+    compressPublicAssets: true
   },
 
   build: {
