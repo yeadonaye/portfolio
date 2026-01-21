@@ -50,7 +50,7 @@
         </button>
         
         <div v-if="isSuccess" class="success-message">
-          <i class="fas fa-check-circle"></i> Votre message a été envoyé avec succès !
+          <i class="fas fa-check-circle"></i> Votre message a été envoyé avec succès ! A très bientôt.
         </div>
         
         <div v-if="errorMessage" class="error-message">
