@@ -39,4 +39,13 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: /usr/bin/alv-restart-site
+          script: |
+            # On tente de trouver la commande automatiquement
+            if command -v alv-restart-site >/dev/null 2>&1; then
+              alv-restart-site
+            else
+              # Si la commande échoue, on tue le processus node. 
+              # Alwaysdata le relancera automatiquement.
+              pkill -u ${{ secrets.SSH_USER }} node || true
+              echo "Processus node relancé par pkill"
+            fi
