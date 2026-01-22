@@ -142,7 +142,11 @@
       </div>
       
       <div class="cv-actions">
-        <a href="assets\ressources\SENTAYEHU_Yeadonaye_Ashenafi.pdf" class="download-btn">
+        <a 
+          href="/ressources/SENTAYEHU_Yeadonaye_Ashenafi.pdf" 
+          download="SENTAYEHU_Yeadonaye_Ashenafi.pdf" 
+          class="download-btn"
+        >
           <i class="fas fa-download"></i> Télécharger le CV complet (PDF)
         </a>
       </div>
@@ -338,25 +342,10 @@
   background-color: var(--github-primary-dark);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
-  .cv-container {
-    padding: 20px;
-  }
-  
-  .skills-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .cv-item-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-  
-  .cv-date {
-    margin-top: 4px;
-  }
+  .cv-container { padding: 20px; }
+  .skills-grid { grid-template-columns: 1fr; gap: 20px; }
+  .cv-item-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .cv-date { margin-top: 4px; }
 }
 </style>

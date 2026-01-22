@@ -4,23 +4,6 @@
     
     <div class="contact-content">
       <form class="contact-form" @submit.prevent="handleSubmit">
-        
-        <div class="cv-download-section">
-          <p class="cv-text">Besoin de mon curriculum vitae ?</p>
-          <a 
-            href="/ressources/mon-cv.pdf" 
-            download="CV_Yeadonaye_Ashenafi.pdf" 
-            class="download-btn"
-          >
-            <i class="fas fa-file-download"></i> Télécharger mon CV (PDF)
-          </a>
-        </div>
-
-        <div class="separator-container">
-          <hr class="separator">
-          <span>OU ENVOYEZ UN MESSAGE</span>
-        </div>
-
         <div class="form-group">
           <label for="name">Nom</label>
           <input 
@@ -74,6 +57,7 @@
           <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
         </div>
       </form>
+      
     </div>
   </div>
 </template>
@@ -86,7 +70,6 @@ const recaptchaSiteKey = '6Ld5bCEsAAAAANpNOgMjH2xP17dtvSdazkoLamVU';
 const isRecaptchaVerified = ref(false);
 const recaptchaElement = ref(null);
 
-// Fonctions globales pour reCAPTCHA
 window.onRecaptchaSuccess = (response) => {
   isRecaptchaVerified.value = true;
 };
@@ -95,7 +78,6 @@ window.onRecaptchaExpired = () => {
   isRecaptchaVerified.value = false;
 };
 
-// Charger reCAPTCHA
 const loadRecaptcha = () => {
   const script = document.createElement('script');
   script.src = `https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit`;
@@ -160,8 +142,7 @@ const handleSubmit = async () => {
     }, 5000);
     
   } catch (error) {
-    console.error('Erreur lors de l\'envoi du message :', error);
-    errorMessage.value = 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer plus tard.';
+    errorMessage.value = 'Une erreur est survenue lors de l\'envoi du message.';
   } finally {
     isLoading.value = false;
   }
@@ -198,61 +179,8 @@ const handleSubmit = async () => {
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 800px;
-}
-
-/* Styles pour la section CV */
-.cv-download-section {
-  text-align: center;
-  padding: 1.5rem;
-  background-color: var(--github-bg);
-  border: 1px solid var(--github-border);
-  border-radius: 6px;
-  margin-bottom: 0.5rem;
-}
-
-.cv-text {
-  margin-bottom: 1rem;
-  font-weight: 500;
-  color: var(--github-text-primary);
-}
-
-.download-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: #2ea44f;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.2s;
-}
-
-.download-btn:hover {
-  background-color: #2c974b;
-}
-
-/* Séparateur */
-.separator-container {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin: 1rem 0;
-  color: var(--github-text-secondary);
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.separator-container::before, .separator-container::after {
-  content: '';
-  flex: 1;
-  border-bottom: 1px solid var(--github-border);
-}
-
-.separator-container span {
-  padding: 0 10px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .form-group {
@@ -301,7 +229,6 @@ textarea.form-control {
   font-weight: 600;
   cursor: pointer;
   width: 100%;
-  transition: all 0.2s;
 }
 
 .submit-btn:disabled {
@@ -315,6 +242,9 @@ textarea.form-control {
   background-color: #e8f5e9;
   color: #2e7d32;
   border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .error-message {
@@ -323,11 +253,12 @@ textarea.form-control {
   background-color: #ffebee;
   color: #c62828;
   border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 @media (max-width: 768px) {
-  .contact-form {
-    padding: 1.5rem;
-  }
+  .contact-form { padding: 2rem 1.5rem; }
 }
 </style>
