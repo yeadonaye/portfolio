@@ -2,8 +2,8 @@
   <aside class="github-sidebar">
     <div class="profile-card">
       <img 
-        src="https://via.placeholder.com/200" 
-        alt="Photo de profil" 
+        src="/profile.jpg" 
+        alt="Photo de profil de SENTAYEHU Yeadonaye" 
         class="profile-avatar"
       >
       <h2 class="profile-name">SENTAYEHU Yeadonaye</h2>
