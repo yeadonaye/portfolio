@@ -151,4 +151,27 @@ const tabs = [
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* Responsive layout */
+@media (max-width: 960px) {
+  .github-container {
+    flex-direction: column;
+  }
+
+  .github-tabs {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tab-btn {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .tab-btn {
+    flex: 1 1 100%;
+  }
+}
 </style>

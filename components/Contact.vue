@@ -4,6 +4,23 @@
     
     <div class="contact-content">
       <form class="contact-form" @submit.prevent="handleSubmit">
+        
+        <div class="cv-download-section">
+          <p class="cv-text">Besoin de mon curriculum vitae ?</p>
+          <a 
+            href="/ressources/mon-cv.pdf" 
+            download="CV_Yeadonaye_Ashenafi.pdf" 
+            class="download-btn"
+          >
+            <i class="fas fa-file-download"></i> Télécharger mon CV (PDF)
+          </a>
+        </div>
+
+        <div class="separator-container">
+          <hr class="separator">
+          <span>OU ENVOYEZ UN MESSAGE</span>
+        </div>
+
         <div class="form-group">
           <label for="name">Nom</label>
           <input 
@@ -57,7 +74,6 @@
           <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
         </div>
       </form>
-      
     </div>
   </div>
 </template>
@@ -66,19 +82,17 @@
 import { ref, onMounted } from 'vue';
 import emailjs from '@emailjs/browser';
 
-const recaptchaSiteKey = '6Ld5bCEsAAAAANpNOgMjH2xP17dtvSdazkoLamVU'; // Votre clé reCAPTCHA
+const recaptchaSiteKey = '6Ld5bCEsAAAAANpNOgMjH2xP17dtvSdazkoLamVU'; 
 const isRecaptchaVerified = ref(false);
 const recaptchaElement = ref(null);
 
 // Fonctions globales pour reCAPTCHA
 window.onRecaptchaSuccess = (response) => {
   isRecaptchaVerified.value = true;
-  console.log('reCAPTCHA verified:', response);
 };
 
 window.onRecaptchaExpired = () => {
   isRecaptchaVerified.value = false;
-  console.log('reCAPTCHA expired');
 };
 
 // Charger reCAPTCHA
@@ -89,7 +103,6 @@ const loadRecaptcha = () => {
   script.defer = true;
   
   window.onRecaptchaLoad = () => {
-    console.log('reCAPTCHA loaded');
     if (window.grecaptcha) {
       window.grecaptcha.render(recaptchaElement.value, {
         sitekey: recaptchaSiteKey,
@@ -123,7 +136,6 @@ const handleSubmit = async () => {
     isLoading.value = true;
     errorMessage.value = '';
     
-    // Configuration EmailJS
     const serviceID = 'service_portfolio';
     const templateID = 'template_portfolio';
     const publicKey = '3XHADdIkc7HguoUkL';
@@ -143,7 +155,6 @@ const handleSubmit = async () => {
     isSuccess.value = true;
     formData.value = { name: '', email: '', message: '' };
     
-    // Réinitialiser le message de succès après 5 secondes
     setTimeout(() => {
       isSuccess.value = false;
     }, 5000);
@@ -178,36 +189,6 @@ const handleSubmit = async () => {
   margin-top: 2rem;
 }
 
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.contact-item i {
-  font-size: 1.5rem;
-  color: var(--github-accent);
-  width: 2rem;
-  text-align: center;
-}
-
-.contact-link {
-  color: var(--github-text-primary);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.contact-link:hover {
-  color: var(--github-accent);
-  text-decoration: underline;
-}
-
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -217,22 +198,61 @@ const handleSubmit = async () => {
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
+  max-width: 800px;
 }
 
-/* Centrer le bouton d'envoi */
-.contact-form .form-group:last-child {
+/* Styles pour la section CV */
+.cv-download-section {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: var(--github-bg);
+  border: 1px solid var(--github-border);
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.cv-text {
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: var(--github-text-primary);
+}
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #2ea44f;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.download-btn:hover {
+  background-color: #2c974b;
+}
+
+/* Séparateur */
+.separator-container {
   display: flex;
-  justify-content: center;
-  margin-top: 1rem;
+  align-items: center;
+  text-align: center;
+  margin: 1rem 0;
+  color: var(--github-text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
-.contact-form .submit-btn {
-  width: auto;
-  min-width: 200px;
-  padding: 0.75rem 2.5rem;
-  margin: 0;
+.separator-container::before, .separator-container::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--github-border);
+}
+
+.separator-container span {
+  padding: 0 10px;
 }
 
 .form-group {
@@ -253,7 +273,6 @@ const handleSubmit = async () => {
   background-color: var(--github-bg);
   color: var(--github-text-primary);
   font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .form-control:focus {
@@ -271,71 +290,23 @@ textarea.form-control {
   display: flex;
   justify-content: center;
   margin: 1.5rem 0;
-  min-height: 78px;
-  background-color: transparent;
-  padding: 0;
-  border: none;
-  box-shadow: none;
-}
-
-/* Style personnalisé pour le widget reCAPTCHA */
-.grecaptcha-badge {
-  visibility: hidden; /* Cache le badge reCAPTCHA */
-}
-
-/* Style pour le conteneur du widget */
-.g-recaptcha > div > div {
-  margin: 0 auto;
 }
 
 .submit-btn {
-  background-color: #2ea44f; /* Couleur plus visible */
+  background-color: #2ea44f;
   color: white;
   border: 1px solid rgba(27, 31, 35, 0.15);
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
   font-weight: 600;
-  font-size: 1rem;
   cursor: pointer;
-  display: flex; /* Changé de inline-flex à flex */
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  transition: all 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-  margin: 1.5rem 0 0;
   width: 100%;
-  position: relative;
-  appearance: none;
-  user-select: none;
-  white-space: nowrap;
-  vertical-align: middle;
-  outline: none;
-  text-decoration: none;
-  box-shadow: 0 1px 0 rgba(27, 31, 35, 0.1);
-}
-
-.submit-btn:hover {
-  background-color: #2c974b;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-decoration: none;
-}
-
-.submit-btn:active {
-  background-color: #2a8f47;
-  box-shadow: inset 0 0.15em 0.3em rgba(27, 31, 35, 0.15);
-  transform: translateY(1px);
+  transition: all 0.2s;
 }
 
 .submit-btn:disabled {
   background-color: #94d3a2;
-  border-color: rgba(27, 31, 35, 0.1);
-  color: rgba(255, 255, 255, 0.8);
   cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-  opacity: 0.8;
-  pointer-events: none;
 }
 
 .success-message {
@@ -344,9 +315,6 @@ textarea.form-control {
   background-color: #e8f5e9;
   color: #2e7d32;
   border-radius: 4px;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
 .error-message {
@@ -355,15 +323,11 @@ textarea.form-control {
   background-color: #ffebee;
   color: #c62828;
   border-radius: 4px;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
   .contact-form {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem;
   }
 }
 </style>

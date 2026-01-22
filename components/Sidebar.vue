@@ -196,4 +196,15 @@ const skills = [
   border-radius: 4px;
   transition: width 1s ease-in-out;
 }
+
+@media (max-width: 960px) {
+  .github-sidebar {
+    width: 100%;
+  }
+
+  .profile-card,
+  .skills-card {
+    margin-bottom: 16px;
+  }
+}
 </style>
