@@ -2,7 +2,7 @@
   <aside class="github-sidebar">
     <div class="profile-card">
       <img 
-        :src="'/ressources/photo.jpeg'" 
+        :src="'https://bit.ly/photoProfilPortfolioSENTAYEHU'" 
         alt="Photo de profil de SENTAYEHU Yeadonaye" 
         class="profile-avatar"
       >
