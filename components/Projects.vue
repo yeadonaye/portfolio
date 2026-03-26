@@ -79,7 +79,7 @@
       </div>
 
       <!-- Projet 4 : Gestionnaire de Club de Foot | Fullstack PHP & JS-->
-      <div class="project-card">
+      <div class="project-card" href="https://liverpool.alwaysdata.net">
         <div class="project-header">
           <h3>Gestionnaire de Club de Foot | Fullstack PHP & JS</h3>
           <div class="project-links">
@@ -92,9 +92,10 @@
             <a href="https://github.com/yeadonaye/LiverpoolAPI-auth" class="project-link" title="Voir le code (API-auth)">
               <i class="fab fa-github"></i>
             </a>
-            <a href="#" class="project-link" title="Voir la démo">
+            <!--
+            <a href="https://liverpool.alwaysdata.net" class="project-link" title="Voir la démo">
               <i class="fas fa-external-link-alt"></i>
-            </a>
+            </a>-->
           </div>
         </div>
         <p class="project-description">
@@ -105,8 +106,6 @@
             <li>API & Sécurité : Développement d'une API REST avec authentification par Token pour sécuriser les échanges entre le client (JavaScript) et le serveur.</li>
             <li>Déploiement : Configuration et mise en ligne sur environnement de production (Alwaysdata).</li>
           </ul>
-          <br>
-          Pour consulter le site appuyez <a href="https://liverpool.alwaysdata.net" target="_blank"> ici</a>!
         </p>
         <div class="project-tech">
           <span class="tech-tag">PHP</span>
