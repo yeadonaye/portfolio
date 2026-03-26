@@ -20,6 +20,17 @@
             Parcours : Administration, Gestion et Exploitation des Données
           </p>
         </div>
+
+        <div class="cv-item">
+          <div class="cv-item-header">
+            <h4>Certification</h4>
+            <span class="cv-date">2022</span>
+          </div>
+          <p class="cv-location">ICog</p>
+          <p class="cv-description">
+            HTML, CSS, JavaScript
+          </p>
+        </div>
         
         <div class="cv-item">
           <div class="cv-item-header">
@@ -30,6 +41,7 @@
           <p class="cv-description">
             Mention Assez Bien<br>
             Spécialités : Mathématiques, NSI, Physique Chimie
+            Option : Maths Expertes
           </p>
         </div>
       </div>
@@ -45,7 +57,7 @@
           <ul class="cv-description">
             <li>Développement d'une application web interne avec Vue.js et Node.js</li>
             <li>Conception et implémentation d'une base de données relationnelle</li>
-            <li>Mise en place d'une API RESTful pour le traitement des données</li>
+            <li>Mise en place d'une API REST pour le traitement des données</li>
           </ul>
         </div>
         
@@ -56,7 +68,7 @@
           </div>
           <p class="cv-location">MARYJOY Ethiopia</p>
           <ul class="cv-description">
-            <li>Aide aux personnes défavorisées</li>
+            <li>Aide aux personnes en difficulté.</li>
           </ul>
         </div>
       </div>
@@ -70,10 +82,11 @@
               <li>Java</li>
               <li>Python</li>
               <li>PL/SQL</li>
-              <li>My SQL</li>
+              <li>JavaScript</li>
               <li>HTML/CSS</li>
               <li>PHP</li>
               <li>Ada</li>
+              <li>MongoDB</li>
             </ul>
           </div>
           
@@ -86,6 +99,7 @@
               <li>Matplotlib</li>
               <li>Flask</li>
               <li>Tkinter</li>
+              <li>Langchain</li>
             </ul>
           </div>
           
@@ -100,6 +114,8 @@
               <li>Visual Studio Code</li>
               <li>Git</li>
               <li>Windev</li>
+              <li>MongoDB</li>
+              <li>Docker</li>
             </ul>
           </div>
         </div>

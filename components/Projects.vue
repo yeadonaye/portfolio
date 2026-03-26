@@ -3,16 +3,13 @@
     <h2>Mes Projets</h2>
     
     <div class="projects-grid">
-      <!-- Projet 1 -->
+      <!-- Projet 1 : Application de vente de Tomate -->
       <div class="project-card">
         <div class="project-header">
           <h3>Application de vente de Tomate</h3>
           <div class="project-links">
-            <a href="#" class="project-link" title="Voir le code">
+            <a href="https://github.com/yeadonaye/ventesDeTomate" class="project-link" title="Voir le code">
               <i class="fab fa-github"></i>
-            </a>
-            <a href="#" class="project-link" title="Voir la démo">
-              <i class="fas fa-external-link-alt"></i>
             </a>
           </div>
         </div>
@@ -20,21 +17,79 @@
           Dans le cadre d’une SAE, j’ai collaboré avec un camarade de classe pour concevoir et développer une application Java destinée à gérer la vente de tomates. Grâce à l’outil WindowBuilder et à l’interface Java Swing, nous avons réalisé une application dotée d’une interface graphique intuitive, permettant de parcourir et sélectionner une large collection de variétés de tomates.
         </p>
         <p class="project-description">
-          Ce projet nous a permis de renforcer nos compétences en développement Java, en conception d’interfaces graphiques et en structuration d’une application orientée utilisateur.         
+          Ce projet nous a permis de renforcer nos compétences en développement Java, en conception d’interfaces graphiques et en structuration d’une application orientée utilisateur. Et dernièrement, nous avons intégré des tests unitaires avec JUnit pour assurer la fiabilité et la robustesse de notre application.        
         </p>
         <div class="project-tech">
           <span class="tech-tag">Java</span>
           <span class="tech-tag">Java Swing</span>
-          <span class="tech-tag"></span>
+          <span class="tech-tag">JUnit 4</span>
+          <span class="tech-tag">Git</span>
         </div>
       </div>
 
-      <!-- Projet 2 -->
+      <!-- Projet 2 : Proxy FTP -->
       <div class="project-card">
         <div class="project-header">
-          <h3>Analyse de Données Météorologiques</h3>
+          <h3>Proxy FTP</h3>
+          <div class="project-links">
+            <a href="https://github.com/yeadonaye/projetFTP" class="project-link" title="Voir le code">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+        <p class="project-description">
+          Ce projet est un proxy FTP écrit en C dont le rôle est d'intercepter les connesxions FTP en mode actif (PORT) et de les convertir automatiquement en mode passif(PASV) côté serveur.
+          <br>
+          Ce proxy relaie dans un premier temps le flux de contrôle (USER, PASS, LIST, QUIT, etc.) et dans un deuxième temps le flux de données entre le client FTP et le serveur distant.
+          <br>
+          L'objectif principal de ce projet est donc de permettre à un client FTP actif de communiquuer avec un serveur FTP passif, de manière transparent.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">C</span>
+          <span class="tech-tag">Makefile</span>
+          <span class="tech-tag">Git</span>
+        </div>
+      </div>
+
+      <!-- Projet 3 : Application de Gestion Immobilière -->
+      <div class="project-card">
+        <div class="project-header">
+          <h3>Application de Gestion Immobilière</h3>
           <div class="project-links">
             <a href="#" class="project-link" title="Voir le code">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+        <p class="project-description">
+          Dans le cadre d’une SAE réalisée en deuxième année de BUT Informatique, nous avons développé en groupe une application de gestion immobilière visant à remplacer des documents de calculs existants par une solution informatisée.
+          <br>
+          L’objectif de ce projet était de concevoir une application complète répondant à un besoin réel, en couvrant l’ensemble du processus, de l’analyse du besoin jusqu’au développement final, dans un cadre académique et collaboratif.
+          <br>
+          À partir des documents fournis, nous avons modélisé les données en créant un MCD, puis conçu et implémenté la base de données, en intégrant des mécanismes de sécurisation tels que des contraintes d’intégrité et des triggers. Nous avons ensuite développé l’application en Java Swing et mis en place des tests unitaires avec JUnit 4 afin de valider son bon fonctionnement.
+          <br>
+          Ce projet m’a permis de travailler sur l’ensemble du cycle de développement logiciel, en combinant conception, modélisation, développement et tests, tout en renforçant mes compétences en travail d’équipe et en développement d’applications Java.
+        </p>
+        <div class="project-tech">
+          <span class="tech-tag">Java Swing</span>
+          <span class="tech-tag">JUnit 4</span>
+          <span class="tech-tag">PL/SQL</span>
+          <span class="tech-tag">Git</span>
+        </div>
+      </div>
+
+      <!-- Projet 4 : Gestionnaire de Club de Foot | Fullstack PHP & JS-->
+      <div class="project-card">
+        <div class="project-header">
+          <h3>Gestionnaire de Club de Foot | Fullstack PHP & JS</h3>
+          <div class="project-links">
+            <a href="https://github.com/yeadonaye/LiverpoolFrontend" class="project-link" title="Voir le code (FrontEnd)">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://github.com/yeadonaye/LiverpoolBackend" class="project-link" title="Voir le code (BackEnd)">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://github.com/yeadonaye/LiverpoolAPI-auth" class="project-link" title="Voir le code (API-auth)">
               <i class="fab fa-github"></i>
             </a>
             <a href="#" class="project-link" title="Voir la démo">
@@ -43,37 +98,27 @@
           </div>
         </div>
         <p class="project-description">
-          Analyse et visualisation de données météorologiques historiques avec Python, Pandas et Matplotlib.
+          Ce projet démontre la mise en place d'une architecture logicielle robuste basée sur le modèle MVC. J'ai conçu une API REST pour assurer la communication entre le backend (PHP) et une interface utilisateur réactive (HTML/CSS/JS).
+          <ul>
+            <li>Backend : Structuration en couches, gestion de base de données MariaDB.</li>
+            <li>Frontend : Consommation d'API.</li>
+            <li>API & Sécurité : Développement d'une API REST avec authentification par Token pour sécuriser les échanges entre le client (JavaScript) et le serveur.</li>
+            <li>Déploiement : Configuration et mise en ligne sur environnement de production (Alwaysdata).</li>
+          </ul>
+          <br>
+          Pour consulter le site appuyez <a href="https://liverpool.alwaysdata.net" target="_blank"> ici</a>!
         </p>
         <div class="project-tech">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">Pandas</span>
-          <span class="tech-tag">Matplotlib</span>
+          <span class="tech-tag">PHP</span>
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">MariaDB</span>
         </div>
       </div>
 
-      <!-- Projet 3 -->
-      <div class="project-card">
-        <div class="project-header">
-          <h3>Site E-commerce</h3>
-          <div class="project-links">
-            <a href="#" class="project-link" title="Voir le code">
-              <i class="fab fa-github"></i>
-            </a>
-            <a href="#" class="project-link" title="Voir la démo">
-              <i class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-        </div>
-        <p class="project-description">
-          Plateforme e-commerce avec système de panier, paiement et gestion des commandes.
-        </p>
-        <div class="project-tech">
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">Express</span>
-          <span class="tech-tag">PostgreSQL</span>
-        </div>
-      </div>
+      <!-- Autres projets... -->
+
     </div>
   </div>
 </template>
