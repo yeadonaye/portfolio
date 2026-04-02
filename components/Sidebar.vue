@@ -16,7 +16,7 @@
         </div>
         <div class="stat">
           <i class="fas fa-envelope"></i>
-          <a href="mailto:yeadonayeashenafi.com">yeadonayeashenafi@gmail.com</a>
+          <a href="mailto:yeadonayeashenafi@gmail.com">yeadonayeashenafi@gmail.com</a>
         </div>
       </div>
       
