@@ -7,6 +7,8 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
+  modules: ['@vercel/speed-insights'],
+
   css: [
     '~/assets/css/main.css',
     '@fortawesome/fontawesome-svg-core/styles.css'
