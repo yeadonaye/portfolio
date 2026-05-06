@@ -7,6 +7,9 @@
     <h1>Deuxieme version de la carte</h1>
     <BusinessCard3DAdvanced />
 
+    <h1>Troisieme version de la carte</h1>
+    <BusinessCardV3 />
+
     <div class="welcome-banner">
       <h2>Bienvenue sur mon portfolio ! 👋</h2>
       <p>
@@ -61,6 +64,8 @@
 </template>
 
 <script setup>
+import BusinessCardV3 from './BusinessCardV3.vue';
+
 // Component logic here
 </script>
 
