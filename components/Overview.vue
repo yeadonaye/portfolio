@@ -1,5 +1,12 @@
 <template>
   <div>
+
+    <h1>Premiere version de la carte</h1>
+    <BusinessCard3D />
+
+    <h1>Deuxieme version de la carte</h1>
+    <BusinessCard3DAdvanced />
+
     <div class="welcome-banner">
       <h2>Bienvenue sur mon portfolio ! 👋</h2>
       <p>
