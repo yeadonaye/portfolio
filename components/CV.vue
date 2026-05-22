@@ -159,7 +159,7 @@
       
       <div class="cv-actions">
         <a 
-          href="https://drive.google.com/uc?export=download&id=1uS0FJNaMPJzFlEnQJxHIJALLj2VuXa_l" 
+          href="https://drive.google.com/uc?export=download&id=17eGm_vvYdw0cpeA_KkGFooidAzGnsXIp"
           download="SENTAYEHU_Yeadonaye_Ashenafi.pdf" 
           class="download-btn"
         >
