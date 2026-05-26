@@ -5,7 +5,7 @@
         <div class="github-nav-left">
           <span class="github-logo">
             <font-awesome-icon icon="code" />
-            <span>Portfolio</span>
+            <span>Yeadonaye Ashenafi - Portfolio</span>
           </span>
         </div>
         <div class="github-nav-right">
