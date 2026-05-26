@@ -1,161 +1,35 @@
-/* Base styles and variables */
-:root {
-  /* Light theme colors */
-  --github-bg: #ffffff;
-  --github-header-bg: #f6f8fa;
-  --github-card-bg: #ffffff;
-  --github-border: #d0d7de;
-  --github-border-active: #0969da;
-  --github-text: #24292f;
-  --github-text-secondary: #57606a;
-  --github-primary: #0969da;
-  --github-primary-dark: #0550ae;
-  --github-hover-bg: #f6f8fa;
-  --github-btn-bg: #f6f8fa;
-  --github-btn-text: #24292f;
-  --github-btn-hover-bg: #f3f4f6;
-  --github-tag-bg: #f6f8fa;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Dark theme colors */
-[data-theme="dark"] {
-  --github-bg: #0d1117;
-  --github-header-bg: #161b22;
-  --github-card-bg: #0d1117;
-  --github-border: #30363d;
-  --github-border-active: #1f6feb;
-  --github-text: #c9d1d9;
-  --github-text-secondary: #8b949e;
-  --github-primary: #58a6ff;
-  --github-primary-dark: #388bfd;
-  --github-hover-bg: #1f2937;
-  --github-btn-bg: #21262d;
-  --github-btn-text: #c9d1d9;
-  --github-btn-hover-bg: #2d333b;
-  --github-tag-bg: #1f2937;
-}
-
-/* Base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: var(--github-bg);
-  color: var(--github-text);
-  line-height: 1.5;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
-
-body.loaded {
-  opacity: 1;
-}
-
-a {
-  color: var(--github-primary);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Container */
-.container {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-/* Utility classes */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-  animation: fadeIn 0.5s ease forwards;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--github-bg);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--github-border);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--github-text-secondary);
-}
-
-/* Print styles */
-@media print {
-  .no-print {
-    display: none !important;
+@layer base {
+  html {
+    @apply scroll-smooth;
   }
-  
+
   body {
-    background: #fff !important;
-    color: #000 !important;
-    font-size: 12pt;
+    @apply bg-slate-50 text-slate-800 antialiased transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100;
   }
-  
-  .container {
-    max-width: 100%;
-    padding: 0;
+
+  ::selection {
+    @apply bg-sky-500/25 text-slate-900 dark:text-slate-50;
   }
-  
-  a {
-    text-decoration: none !important;
-    color: #000 !important;
+}
+
+@layer components {
+  .section-shell {
+    @apply rounded-3xl border border-slate-200/70 bg-white/85 p-6 shadow-soft backdrop-blur-sm md:p-10 dark:border-slate-800 dark:bg-slate-900/80;
   }
-  
-  .cv-container {
-    box-shadow: none !important;
-    border: none !important;
-    padding: 0 !important;
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-slate-300/70 bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:border-slate-500;
   }
 }
