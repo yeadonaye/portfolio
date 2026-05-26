@@ -3,11 +3,11 @@
     <div class="profile-card">
       <img 
         src="/photo.jpeg" 
-        alt="Photo de profil de SENTAYEHU Yeadonaye" 
+        alt="Photo de profil" 
         class="profile-avatar"
       >
       <h2 class="profile-name">SENTAYEHU Yeadonaye</h2>
-      <p class="profile-username">Étudiant en Informatique</p>
+      <p class="profile-username">Étudiant en Informatique | Stagiaire Informatique à l'IRIT</p>
       
       <div class="profile-stats">
         <div class="stat">
