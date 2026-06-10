@@ -9,6 +9,15 @@ export default defineNuxtConfig({
 
   modules: ['@vercel/speed-insights'],
 
+  runtimeConfig: {
+    githubToken: process.env.GITHUB_TOKEN || '',
+    githubUsername: process.env.GITHUB_USERNAME || 'yeadonaye',
+    linkedinAccessToken: process.env.LINKEDIN_ACCESS_TOKEN || '',
+    linkedinPersonUrn: process.env.LINKEDIN_PERSON_URN || '',
+    linkedinProfileUrl: process.env.LINKEDIN_PROFILE_URL || 'https://www.linkedin.com/in/yeadonaye/',
+    linkedinFallbackPostsJson: process.env.LINKEDIN_FALLBACK_POSTS_JSON || ''
+  },
+
   css: [
     '~/assets/css/main.css',
     '@fortawesome/fontawesome-svg-core/styles.css'

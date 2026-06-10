@@ -8,6 +8,15 @@
             <span>Yeadonaye Ashenafi - Portfolio</span>
           </span>
         </div>
+        <div class="github-nav-center">
+          <NuxtLink to="/" :class="['nav-link', { active: route.path === '/' }]">Accueil</NuxtLink>
+          <NuxtLink to="/github-contributions" :class="['nav-link', { active: route.path === '/github-contributions' }]">
+            GitHub Contributions
+          </NuxtLink>
+          <NuxtLink to="/linkedin-posts" :class="['nav-link', { active: route.path === '/linkedin-posts' }]">
+            LinkedIn Posts
+          </NuxtLink>
+        </div>
         <div class="github-nav-right">
           <button class="theme-toggle" @click="toggleTheme" :title="isDark ? 'Passer en mode clair' : 'Passer en mode sombre'">
             <font-awesome-icon :icon="isDark ? 'sun' : 'moon'" />
@@ -22,6 +31,7 @@
 import { ref, onMounted } from 'vue';
 
 const isDark = ref(false);
+const route = useRoute();
 
 const toggleTheme = () => {
   isDark.value = !isDark.value;
@@ -52,6 +62,38 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
+}
+
+.github-nav-center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav-link {
+  color: var(--github-text-secondary);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--github-text);
+  background-color: var(--github-hover-bg);
+  text-decoration: none;
+}
+
+.nav-link.active {
+  color: var(--github-primary);
+  border-color: var(--github-border-active);
+  background-color: var(--github-hover-bg);
 }
 
 .github-logo {
@@ -87,5 +129,19 @@ onMounted(() => {
 .theme-toggle:hover {
   background-color: var(--github-hover-bg);
   color: var(--github-text);
+}
+
+@media (max-width: 960px) {
+  .github-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .github-nav-left,
+  .github-nav-right {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
 </style>

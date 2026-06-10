@@ -3,9 +3,11 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-links">
-          <a href="#projects" @click.prevent="scrollTo('projects')" class="footer-link">Projets</a>
-          <a href="#cv" @click.prevent="scrollTo('cv')" class="footer-link">CV</a>
-          <a href="#contact" @click.prevent="scrollTo('contact')" class="footer-link">Contact</a>
+          <button type="button" @click="goToHomeSection('projects')" class="footer-link">Projets</button>
+          <button type="button" @click="goToHomeSection('cv')" class="footer-link">CV</button>
+          <button type="button" @click="goToHomeSection('contact')" class="footer-link">Contact</button>
+          <NuxtLink to="/github-contributions" class="footer-link">GitHub Contributions</NuxtLink>
+          <NuxtLink to="/linkedin-posts" class="footer-link">LinkedIn Posts</NuxtLink>
         </div>
         <div class="footer-social">
           <a href="https://github.com/yeadonaye" class="social-link" aria-label="GitHub" title="GitHub">
@@ -30,16 +32,20 @@
 import { computed } from 'vue';
 
 const currentYear = computed(() => new Date().getFullYear());
+const route = useRoute();
+const router = useRouter();
 
-const scrollTo = (section) => {
-  // Mettre à jour l'onglet actif
-  window.dispatchEvent(new CustomEvent('tab-change', { detail: section }));
-  
-  // Faire défiler vers la section
-  const element = document.getElementById(section);
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
+const goToHomeSection = async (section) => {
+  if (route.path === '/') {
+    window.dispatchEvent(new CustomEvent('tab-change', { detail: section }));
+    const element = document.getElementById(section);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+    return;
   }
+
+  await router.push({ path: '/', hash: `#${section}` });
 };
 </script>
 
@@ -74,6 +80,8 @@ const scrollTo = (section) => {
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
+  border: none;
+  background: transparent;
 }
 
 .footer-link:hover {
