@@ -57,6 +57,8 @@
 import { ref } from 'vue'
 import emailjs from '@emailjs/browser'
 
+const { public: publicConfig } = useRuntimeConfig()
+
 const formData = ref({
   name: '',
   email: '',
@@ -78,15 +80,15 @@ const submitForm = async () => {
 
   try {
     await emailjs.send(
-      'service_portfolio',
-      'template_portfolio',
+      publicConfig.emailjsServiceId,
+      publicConfig.emailjsTemplateId,
       {
         from_name: formData.value.name,
         from_email: formData.value.email,
         message: formData.value.message,
         to_email: 'yeadonayeashenafi@gmail.com'
       },
-      '3XHADdIkc7HguoUkL'
+      publicConfig.emailjsPublicKey
     )
 
     formData.value = { name: '', email: '', message: '' }

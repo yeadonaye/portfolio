@@ -30,5 +30,12 @@ export default defineNuxtConfig({
       '@fortawesome/free-brands-svg-icons',
       '@emailjs/browser'
     ]
+  },
+  runtimeConfig: {
+    public: {
+      emailjsServiceId: process.env.NUXT_PUBLIC_EMAILJS_SERVICE_ID ?? '',
+      emailjsTemplateId: process.env.NUXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? '',
+      emailjsPublicKey: process.env.NUXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? ''
+    }
   }
 })
