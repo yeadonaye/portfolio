@@ -219,6 +219,9 @@ onMounted(() => {
     { threshold: 0.35 }
   )
 
+  const hero = document.getElementById('hero')
+  if (hero) observer?.observe(hero)
+
   navItems.forEach((item) => {
     const section = document.getElementById(item.id)
     if (section) observer?.observe(section)
