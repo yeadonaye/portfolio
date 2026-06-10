@@ -188,7 +188,7 @@ const timeline = [
   }
 ]
 
-const activeSection = ref('about')
+const activeSection = ref('hero')
 const isDark = ref(false)
 let observer: IntersectionObserver | null = null
 
