@@ -5,45 +5,39 @@
     <main class="container page-container">
       <section class="page-hero">
         <h1>LinkedIn Posts</h1>
-        <p>Mes publications LinkedIn sont récupérées dynamiquement lorsque l’API est configurée.</p>
+        <p>Section intégrée via l’embed LinkedIn pour afficher rapidement le profil et accéder aux derniers posts.</p>
       </section>
 
-      <section v-if="pending" class="state-card">
-        <p class="state-title">Chargement des posts LinkedIn…</p>
-        <div class="skeleton-grid">
-          <div v-for="index in 5" :key="index" class="skeleton-item"></div>
+      <section v-if="isLoading" class="state-card">
+        <p class="state-title">Chargement de l’embed LinkedIn…</p>
+        <div class="skeleton-item"></div>
+      </section>
+
+      <section v-else-if="hasError" class="state-card">
+        <p class="state-title">Impossible de charger l’embed LinkedIn.</p>
+        <p class="state-text">Vous pouvez ouvrir directement le profil et voir les posts.</p>
+        <a :href="profileUrl" target="_blank" rel="noopener noreferrer" class="action-link">Ouvrir le profil LinkedIn</a>
+      </section>
+
+      <section v-else class="content-section">
+        <h2>Profil LinkedIn intégré</h2>
+        <div class="embed-card">
+          <ClientOnly>
+            <div
+              class="badge-base LI-profile-badge"
+              data-locale="fr_FR"
+              data-size="large"
+              data-theme="light"
+              data-type="VERTICAL"
+              :data-vanity="profileVanity"
+              data-version="v1"
+            >
+              <a class="badge-base__link LI-simple-link" :href="profileUrl">Voir le profil LinkedIn</a>
+            </div>
+          </ClientOnly>
         </div>
+        <a :href="profileUrl" target="_blank" rel="noopener noreferrer" class="action-link">Voir les derniers posts sur LinkedIn</a>
       </section>
-
-      <section v-else-if="error" class="state-card">
-        <p class="state-title">Impossible de charger les posts LinkedIn.</p>
-        <p class="state-text">Vérifiez la configuration API ou réessayez.</p>
-        <button class="action-btn" @click="refresh()">Réessayer</button>
-      </section>
-
-      <template v-else>
-        <section v-if="message" class="state-card">
-          <p class="state-text">{{ message }}</p>
-        </section>
-
-        <section v-if="!posts.length" class="state-card">
-          <p class="state-title">Aucun post disponible pour le moment.</p>
-          <p class="state-text">Dès qu’un post est publié, cette page se mettra à jour automatiquement.</p>
-        </section>
-
-        <section v-else class="content-section">
-          <h2>Posts récents</h2>
-          <div class="cards-grid">
-            <article v-for="post in posts" :key="post.id" class="content-card">
-              <p class="post-text">{{ truncate(post.text) }}</p>
-              <div class="card-meta">
-                <span>{{ formatDate(post.publishedAt) }}</span>
-              </div>
-              <a :href="post.url" target="_blank" rel="noopener noreferrer" class="card-link">Voir le post LinkedIn</a>
-            </article>
-          </div>
-        </section>
-      </template>
     </main>
 
     <Footer />
@@ -51,20 +45,35 @@
 </template>
 
 <script setup>
-const { data, pending, error, refresh } = await useAsyncData('linkedin-posts', () =>
-  $fetch('/api/linkedin-posts')
-);
+const config = useRuntimeConfig();
+const profileUrl = config.public.linkedinProfileUrl;
+const profileVanity = config.public.linkedinProfileVanity;
+const isLoading = ref(true);
+const hasError = ref(false);
 
-const posts = computed(() => data.value?.posts || []);
-const message = computed(() => data.value?.message || '');
+onMounted(() => {
+  const existingScript = document.querySelector('script[data-linkedin-embed="true"]');
+  if (existingScript) {
+    isLoading.value = false;
+    return;
+  }
 
-const formatDate = (value) =>
-  new Intl.DateTimeFormat('fr-FR', {
-    dateStyle: 'medium',
-    timeStyle: 'short'
-  }).format(new Date(value));
+  const script = document.createElement('script');
+  script.src = 'https://platform.linkedin.com/badges/js/profile.js';
+  script.async = true;
+  script.defer = true;
+  script.type = 'text/javascript';
+  script.setAttribute('data-linkedin-embed', 'true');
+  script.onload = () => {
+    isLoading.value = false;
+  };
+  script.onerror = () => {
+    hasError.value = true;
+    isLoading.value = false;
+  };
 
-const truncate = (value) => (value.length > 240 ? `${value.slice(0, 240)}…` : value);
+  document.body.appendChild(script);
+});
 </script>
 
 <style scoped>
@@ -93,43 +102,14 @@ const truncate = (value) => (value.length > 240 ? `${value.slice(0, 240)}…` : 
   margin-bottom: 14px;
 }
 
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.content-card {
+.embed-card {
   background-color: var(--github-card-bg);
   border: 1px solid var(--github-border);
   border-radius: 10px;
-  padding: 18px;
+  padding: 20px;
+  margin-bottom: 14px;
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  animation: fadeIn 0.35s ease;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.content-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--github-border-active);
-}
-
-.post-text {
-  color: var(--github-text);
-  font-size: 14px;
-  line-height: 1.6;
-  white-space: pre-line;
-}
-
-.card-meta {
-  color: var(--github-text-secondary);
-  font-size: 12px;
-}
-
-.card-link {
-  margin-top: auto;
+  justify-content: center;
 }
 
 .state-card {
@@ -149,24 +129,25 @@ const truncate = (value) => (value.length > 240 ? `${value.slice(0, 240)}…` : 
   color: var(--github-text-secondary);
 }
 
-.action-btn {
+.action-link {
+  display: inline-block;
   margin-top: 12px;
   background-color: var(--github-btn-bg);
   border: 1px solid var(--github-border);
   color: var(--github-btn-text);
   border-radius: 6px;
   padding: 8px 12px;
+  text-decoration: none;
 }
 
-.skeleton-grid {
-  margin-top: 12px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
+.action-link:hover {
+  text-decoration: none;
+  border-color: var(--github-border-active);
 }
 
 .skeleton-item {
-  height: 100px;
+  height: 180px;
+  margin-top: 12px;
   border-radius: 8px;
   background: linear-gradient(90deg, var(--github-hover-bg), var(--github-card-bg), var(--github-hover-bg));
   background-size: 200% 100%;

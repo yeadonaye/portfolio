@@ -12,10 +12,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     githubToken: process.env.GITHUB_TOKEN || '',
     githubUsername: process.env.GITHUB_USERNAME || 'yeadonaye',
-    linkedinAccessToken: process.env.LINKEDIN_ACCESS_TOKEN || '',
-    linkedinPersonUrn: process.env.LINKEDIN_PERSON_URN || '',
-    linkedinProfileUrl: process.env.LINKEDIN_PROFILE_URL || 'https://www.linkedin.com/in/yeadonaye/',
-    linkedinFallbackPostsJson: process.env.LINKEDIN_FALLBACK_POSTS_JSON || ''
+    public: {
+      linkedinProfileUrl: process.env.LINKEDIN_PROFILE_URL || 'https://www.linkedin.com/in/yeadonaye/',
+      linkedinProfileVanity: process.env.LINKEDIN_PROFILE_VANITY || 'yeadonaye'
+    }
   },
 
   css: [
