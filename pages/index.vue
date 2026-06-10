@@ -28,7 +28,7 @@
           </div>
 
           <aside class="section-shell animate-float">
-            <img src="/photo.jpeg" alt="Photo de profil de SENTAYEHU Yeadonaye" class="mx-auto h-36 w-36 rounded-2xl object-cover ring-4 ring-sky-500/30" />
+            <img src="/photo.jpeg" alt="Photo de profil de SENTAYEHU Yeadonaye" width="144" height="144" class="mx-auto h-36 w-36 rounded-2xl object-cover ring-4 ring-sky-500/30" />
             <h2 class="mt-4 text-center text-xl font-semibold text-slate-900 dark:text-slate-100">SENTAYEHU Yeadonaye</h2>
             <p class="mt-1 text-center text-sm text-slate-600 dark:text-slate-300">Étudiant BUT Informatique · Toulouse, France</p>
             <div class="mt-5 flex flex-wrap justify-center gap-2">
